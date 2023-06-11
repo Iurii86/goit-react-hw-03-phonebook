@@ -19,6 +19,19 @@ export class App extends Component {
     name: '',
     number: '',
   };
+
+  componentDidMount() {
+    if (JSON.parse(localStorage.getItem('contacts'))) {
+      this.setState({
+        contacts: JSON.parse(localStorage.getItem('contacts')),
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  }
+
   addContact = cont => {
     this.setState(prevState => {
       cont.id = nanoid();
